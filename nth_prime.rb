@@ -1,25 +1,14 @@
 module NthPrime
   def nth(number)
     raise ArgumentError, 'invalid number' if number.zero?
+    return 2 if number == 1
     count = 1
-    while number > 0
-      count += 1
-      count = nextPrime(count)
-      number -= 1
+    increment = 1
+    while count < number
+      increment += 2
+      count += 1 if isPrime(increment)
     end
-    count
-  end
-
-  def nextPrime(number)
-    isprime = false
-    until isprime == true
-      if isPrime(number)
-        return number
-      else
-        number += 1
-        isPrime(number)
-      end
-    end
+    increment
   end
 
   def isPrime(number)
